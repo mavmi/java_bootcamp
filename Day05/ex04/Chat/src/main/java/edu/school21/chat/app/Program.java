@@ -8,6 +8,7 @@ import edu.school21.chat.models.User;
 import edu.school21.chat.repositories.MessagesRepository;
 import edu.school21.chat.repositories.MessagesRepositoryJdbcImpl;
 import edu.school21.chat.repositories.NotSavedSubEntityException;
+import edu.school21.chat.repositories.UsersRepositoryJdbcImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,26 +21,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Program {
     public static void main(String[] args){
         HikariDataSource hikariDataSource = getDataSource();
 
-        MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(hikariDataSource);
-        Optional<Message> messageOptional = messagesRepository.findById(1L);
-        if (messageOptional.isPresent()) {
-            User newAuthor = new User(2L, "newAuthor", "newAuthor", new ArrayList(), new ArrayList());
-            ChatRoom room = new ChatRoom(4L, "room", newAuthor, new ArrayList());
-            Message message = messageOptional.get();
-            message.setText("Hello world 2");
-            message.setDatetime(null);
-            message.setAuthor(newAuthor);
-            message.setRoom(room);
-            try {
-                messagesRepository.update(message);
-            } catch (RuntimeException e){
-                System.err.println(e.getMessage());
-            }
+        UsersRepositoryJdbcImpl usersRepositoryJdbc = new UsersRepositoryJdbcImpl(hikariDataSource);
+        try {
+            usersRepositoryJdbc.findAll(0, 10000);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
         }
     }
 
