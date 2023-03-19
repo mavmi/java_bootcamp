@@ -1,4 +1,8 @@
 **/.idea/
 **/target/
 
+**/.DS_Store
 **/*.class
+**/*test*
+**/*.iml
+
