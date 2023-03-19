@@ -18,22 +18,20 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args){
         HikariDataSource hikariDataSource = getDataSource();
 
-        User creator = new User(1L, "user", "user", new ArrayList(), new ArrayList());
-        User author = creator;
-        ChatRoom room = new ChatRoom(2L, "room", creator, new ArrayList());
-        Message message = new Message(-1, author, room, "Hello!", Timestamp.valueOf(LocalDateTime.now()));
         MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(hikariDataSource);
-        try {
-            messagesRepository.save(message);
-            System.out.println(message.getId());
-        } catch (NotSavedSubEntityException e){
-            System.err.println(e.getMessage());
+        Optional<Message> messageOptional = messagesRepository.findById(-12L);
+        if (messageOptional.isPresent()) {
+            Message message = messageOptional.get();
+            message.setText("Bye");
+            message.setDatetime(null);
+            messagesRepository.update(message);
         }
     }
 
