@@ -5,4 +5,5 @@
 **/*.class
 **/*.iml
 **/*test*.sql
+**/ex04.sql
 

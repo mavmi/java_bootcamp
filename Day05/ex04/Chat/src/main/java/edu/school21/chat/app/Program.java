@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
@@ -29,9 +30,13 @@ public class Program {
 
         UsersRepositoryJdbcImpl usersRepositoryJdbc = new UsersRepositoryJdbcImpl(hikariDataSource);
         try {
-            usersRepositoryJdbc.findAll(0, 10000);
+            List<User> users = usersRepositoryJdbc.findAll(0, 99);
+            for (User user : users){
+                System.out.println(user);
+            }
         } catch (Exception e){
             System.err.println(e.getMessage());
+            System.exit(-1);
         }
     }
 
