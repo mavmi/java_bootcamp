@@ -31,7 +31,7 @@ public class ProductsRepositoryJdbcImpl implements ProductsRepository{
             }
             return result;
         } catch (SQLException e) {
-            return null;
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -47,10 +47,10 @@ public class ProductsRepositoryJdbcImpl implements ProductsRepository{
                         resultSet.getInt("price")
                 ));
             } else {
-                throw new SQLException();
+                return Optional.empty();
             }
         } catch (SQLException e){
-            return Optional.empty();
+            throw new RuntimeException(e.getMessage());
         }
     }
 

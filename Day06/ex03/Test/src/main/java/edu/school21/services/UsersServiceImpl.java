@@ -21,7 +21,7 @@ public class UsersServiceImpl {
             usersRepository.update(user);
             return true;
         } catch (EntityNotFoundException e){
-            return false;
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

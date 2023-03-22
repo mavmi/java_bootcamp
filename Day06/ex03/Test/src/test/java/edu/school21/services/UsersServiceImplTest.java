@@ -55,6 +55,9 @@ public class UsersServiceImplTest {
 
     @Test
     public void testIncorrectUser(){
-        Assertions.assertFalse(new UsersServiceImpl(usersRepository).authenticate("user3", "qwe123"));
+        Assertions.assertThrows(
+                RuntimeException.class,
+                () -> new UsersServiceImpl(usersRepository).authenticate("user3", "qwe123")
+        );
     }
 }

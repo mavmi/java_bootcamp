@@ -54,11 +54,13 @@ public class ProductsRepositoryJdbcImplTest {
     @Test
     public void testFindAll(){
         List<Product> goodRes = goodProductsRepository.findAll();
-        List<Product> wrongRes = wrongProductsRepository.findAll();
 
         assertEquals(EXPECTED_FIND_ALL_PRODUCTS, goodRes);
         assertNotNull(goodRes);
-        assertNull(wrongRes);
+        assertThrows(
+                RuntimeException.class,
+                () -> wrongProductsRepository.findAll()
+        );
     }
 
     @Test
@@ -67,6 +69,12 @@ public class ProductsRepositoryJdbcImplTest {
         Optional<Product> found = goodProductsRepository.findById(4L);
         if (!found.isPresent()) assertTrue(false);
         assertEquals(EXPECTED_FIND_ALL_PRODUCTS.get(4), found.get());
+
+        goodDb.shutdown();
+        assertThrows(
+                RuntimeException.class,
+                () -> goodProductsRepository.findById(3L)
+        );
     }
 
     @Test
