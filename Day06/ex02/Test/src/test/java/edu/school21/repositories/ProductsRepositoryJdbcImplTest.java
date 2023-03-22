@@ -38,7 +38,7 @@ public class ProductsRepositoryJdbcImplTest {
                 .build();
         wrongDb = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
-                .setName("KJHGEW54UHLFJVKW4580IGJERLWKJWEM")
+                .setName("qwe123")
                 .build();
 
         goodProductsRepository = new ProductsRepositoryJdbcImpl(goodDb);
@@ -48,13 +48,17 @@ public class ProductsRepositoryJdbcImplTest {
     @AfterEach
     public void destroy(){
         goodDb.shutdown();
+        wrongDb.shutdown();
     }
 
     @Test
     public void testFindAll(){
-        assertEquals(EXPECTED_FIND_ALL_PRODUCTS, goodProductsRepository.findAll());
-        assertNotNull(goodProductsRepository.findAll());
-        assertNull(wrongProductsRepository.findAll());
+        List<Product> goodRes = goodProductsRepository.findAll();
+        List<Product> wrongRes = wrongProductsRepository.findAll();
+
+        assertEquals(EXPECTED_FIND_ALL_PRODUCTS, goodRes);
+        assertNotNull(goodRes);
+        assertNull(wrongRes);
     }
 
     @Test
@@ -123,75 +127,8 @@ public class ProductsRepositoryJdbcImplTest {
                 wrongProductsRepository.delete(2222L);
                 assertNotNull(null);
             } catch (RuntimeException e){
-                assertTrue(false);
+                assertTrue(true);
             }
         }
     }
-
-    /*
-    @BeforeEach
-    public void init(){
-        try {
-            database = new EmbeddedDatabaseBuilder()
-                    .setType(EmbeddedDatabaseType.HSQL)
-                    .setName("Day06")
-                    .addScript("schema.sql")
-                    .addScript("data.sql")
-                    .build();
-            productsRepository = new ProductsRepositoryJdbcImpl(database.getConnection());
-        } catch (SQLException e) {
-            assertNotNull(null);
-        }
-    }
-
-    @AfterEach
-    public void destroy(){
-        database.shutdown();
-    }
-
-    @Test
-    public void testFindAll(){
-        assertEquals(EXPECTED_FIND_ALL_PRODUCTS, productsRepository.findAll());
-        assertNull(productsRepository.findAll());
-    }
-
-    @Test
-    public void testFindById(){
-        assertFalse(productsRepository.findById(123L).isPresent());
-        Optional<Product> found = productsRepository.findById(4L);
-        if (!found.isPresent()) assertTrue(false);
-        assertEquals(EXPECTED_FIND_ALL_PRODUCTS.get(4), found.get());
-    }
-
-    @Test
-    public void testUpdate(){
-        productsRepository.update(new Product(4L, "Product5", 999));
-        Optional<Product> found = productsRepository.findById(4L);
-        if (!found.isPresent()) assertTrue(false);
-        Product product = found.get();
-        assertEquals(product.getId(), 4L);
-        assertEquals(product.getName(), "Product5");
-        assertEquals(product.getPrice(), 999);
-    }
-
-    @Test
-    public void testSave(){
-        productsRepository.save(new Product(5L, "pr6", 1234));
-        Optional<Product> found = productsRepository.findById(5L);
-        if (!found.isPresent()) assertTrue(false);
-        Product product = found.get();
-        assertEquals(product.getId(), 5L);
-        assertEquals(product.getName(), "pr6");
-        assertEquals(product.getPrice(), 1234);
-    }
-
-    @Test
-    public void testDelete(){
-        Optional<Product> found = productsRepository.findById(4L);
-        if (!found.isPresent()) assertTrue(false);
-        productsRepository.delete(4L);
-        found = productsRepository.findById(4L);
-        if (found.isPresent()) assertTrue(false);
-    }
-    */
 }

@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductsRepositoryJdbcImpl implements ProductsRepository{
-//    private Connection connection;
-
-//    public ProductsRepositoryJdbcImpl(Connection connection){
-//        this.connection = connection;
-//    }
     private EmbeddedDatabase database;
 
     public ProductsRepositoryJdbcImpl(EmbeddedDatabase database){
