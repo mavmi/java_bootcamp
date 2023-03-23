@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Reflection</groupId>
-    <artifactId>ex00</artifactId>
+    <artifactId>ex01</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,6 +13,15 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>1.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -24,6 +33,20 @@
                     <source>8</source>
                     <target>8</target>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <proc>only</proc>
+                            <annotationProcessors>
+                                <annotationProcessor>processor.FtProcessor</annotationProcessor>
+                            </annotationProcessors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

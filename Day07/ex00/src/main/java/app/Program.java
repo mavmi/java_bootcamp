@@ -99,9 +99,10 @@ public class Program {
                     if (i + 1 != paramsCount) System.out.print(", ");
                 }
                 System.out.print(")\n");
-                System.out.println(SEPARATOR);
-                return cls;
             }
+
+            System.out.println(SEPARATOR);
+            return cls;
         }
     }
     private static Object createAnObject(Class<?> cls){
