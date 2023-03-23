@@ -11,8 +11,6 @@ import javax.lang.model.element.TypeElement;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +57,7 @@ public class FtProcessor extends AbstractProcessor {
                 );
             }
 
+            content.add("<input type = \"submit\" value = \"Send\">");
             content.add("</form>");
             writeToFile(fileName, content);
         }
