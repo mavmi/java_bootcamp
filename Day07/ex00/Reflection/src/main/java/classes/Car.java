@@ -15,18 +15,18 @@ public class Car {
         this.Color = Color;
     }
 
-    int increaseSpeed(int delta){
+    public int increaseSpeed(int delta){
         Speed += delta;
         return Speed;
     }
-    int decreaseSpeed(int delta){
+    public int decreaseSpeed(int delta){
         if (Speed - delta >= 0){
             Speed -= delta;
         }
         return Speed;
     }
 
-    String changeColor(String Color){
+    public String changeColor(String Color){
         this.Color = Color;
         return "New color is " + this.Color;
     }

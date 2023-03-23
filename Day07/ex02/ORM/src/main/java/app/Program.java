@@ -23,12 +23,14 @@ public class Program {
                 ormManager.save(user3);
             }
             {
-                User user = new User(2L, "name22", "surname22", 322);
-                ormManager.update(user);
+                ormManager.update(new User(22L, "name22", "surname22", 322));
+                ormManager.update(new User(2L, "name123", "surname123", 123));
             }
             {
-                User user = ormManager.findById(2L, User.class);
-                System.out.println(user);
+                System.out.println(ormManager.findById(123L, User.class));
+                System.out.println(ormManager.findById(1L, User.class));
+                System.out.println(ormManager.findById(2L, User.class));
+                System.out.println(ormManager.findById(3L, User.class));
             }
         } catch (RuntimeException e){
             System.err.println(e.getMessage());

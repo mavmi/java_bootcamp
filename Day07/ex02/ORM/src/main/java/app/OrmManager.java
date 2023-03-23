@@ -9,7 +9,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -208,12 +207,12 @@ public class OrmManager {
         String tableName = aClass.getAnnotation(OrmEntity.class).table();
         ResultSet resultSet = executeQuery(
                 new StringBuilder()
-                    .append("select * from ")
-                    .append(tableName)
-                    .append(" where id=")
-                    .append(id)
-                    .append(";")
-                    .toString()
+                        .append("select * from ")
+                        .append(tableName)
+                        .append(" where id=")
+                        .append(id)
+                        .append(";")
+                        .toString()
         );
 
         try {
@@ -275,9 +274,6 @@ public class OrmManager {
         return new HikariDataSource(hikariConfig);
     }
     private ResultSet executeQuery(String sql){
-        System.out.println("GENERATED SQL QUERY:");
-        System.out.println(sql);
-
         try {
             printQuery(sql);
             return hikariDataSource.getConnection().createStatement().executeQuery(sql);
@@ -297,5 +293,4 @@ public class OrmManager {
         System.out.println("GENERATED SQL QUERY:");
         System.out.println(sql);
     }
-
 }

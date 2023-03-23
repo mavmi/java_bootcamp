@@ -16,13 +16,9 @@ import java.util.List;
 import java.util.Set;
 
 @AutoService(Processor.class)
-//@SupportedAnnotationTypes({"annotation.HtmlForm", "annotation.HtmlInput"})
 @SupportedAnnotationTypes("annotation.HtmlForm")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class FtProcessor extends AbstractProcessor {
-
-    // Set<? extends TypeElement> annotations - set of annotations
-    // RoundEnvironment roundEnv - information about the current processing round
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (Element cls : roundEnv.getElementsAnnotatedWith(HtmlForm.class)) {
@@ -57,7 +53,7 @@ public class FtProcessor extends AbstractProcessor {
                 );
             }
 
-            content.add("<input type = \"submit\" value = \"Send\">");
+            content.add("\t<input type = \"submit\" value = \"Send\">");
             content.add("</form>");
             writeToFile(fileName, content);
         }
