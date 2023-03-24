@@ -16,6 +16,7 @@
 
     <bean id="printerWithPrefix" class="edu.school21.printer.PrinterWithPrefixImpl">
         <constructor-arg name="renderer" ref="rendererErr"/>
+        <property name="prefix" value="Spring_Context_Prefix"/>
     </bean>
     <bean id="printerWithDateTime" class="edu.school21.printer.PrinterWithDateTimeImpl">
         <constructor-arg name="renderer" ref="rendererStd"/>
