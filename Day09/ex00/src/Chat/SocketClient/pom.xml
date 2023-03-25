@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Chat</groupId>
-    <artifactId>SocketClient00</artifactId>
+    <artifactId>00_client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
